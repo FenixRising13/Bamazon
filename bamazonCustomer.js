@@ -2,6 +2,7 @@ require('console.table');
 var inquirer = require('inquirer');
 var mysql = require('mysql');
 var Chalk = require('chalk');
+var colors = require('colors');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -21,6 +22,7 @@ connection.connect(function (err) {
 });
 
 var ReadData = function () {
+
     connection.query('SELECT id, item_id, price, stock_quantity, platform FROM products', function (err2, res) {
         if (err2) throw err2;
         console.table(res);
@@ -43,11 +45,11 @@ var ask = function () {
             connection.query('SELECT * FROM products WHERE id = ?', [answer.choose], function (err3, results) {
                 if (err3) throw err3;
                 // 
-                console.log(results);
+                // console.log(results);
                 var qty = parseInt(answer.qty);
                 var stock;
                 var price;
-                console.log(qty);
+                // console.log(qty); 
 
 
                 for (i = 0; i < results.length; i++) {
