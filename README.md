@@ -1,7 +1,7 @@
 # Bamazon
 Week 6 Assignment: Bamazon
 
-##Description: Bamazon is the premiere alternative for the big A.
+#Description: Bamazon is the premiere alternative for the big A.
   *Customer - use bamazonCustomer
   *Manager - use bamazonManager
 
