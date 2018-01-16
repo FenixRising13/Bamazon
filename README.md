@@ -27,3 +27,6 @@ Built With
 
 Authors
 Mark Powalisz
+
+![alt text](bamazon_fail.gif "Failing GIF")
+![alt text](bamazon_pass.gif "Passing GIF")
