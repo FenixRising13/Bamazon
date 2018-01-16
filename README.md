@@ -25,7 +25,7 @@ Week 6 Assignment: Bamazon
   * Terminal
   * VS Code
 
-## Authors...
+## Authors
   Mark Powalisz
 
 ![alt text](bamazon_pass.gif "Passing GIF")
