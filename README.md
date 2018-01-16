@@ -5,27 +5,27 @@ Week 6 Assignment: Bamazon
   * Customer - use bamazonCustomer
   * Manager - use bamazonManager
 
-##Getting Started
+## Getting Started
   * Clone the repository.
   * Run 'npm install' in command line to install dependencies
   * Run command 'node app.js' to play Star Wars Trivia
 
-##Technology used
+## Technology used
   * Node.js
   * Inquirer NPM Package - https://www.npmjs.com/package/inquirer
   * Chalk NPM Package – https://www.npmjs.com/package/chalk
   * MySQL - https://www.npmjs.com/package/mysql
 
-##Prerequisites
+## Prerequisites
   * MySQL
   * Node.js - Download the latest version of Node https://nodejs.org/en/
 
-##Built With
+## Built With
   * Sequel Pro (Mac)
   * Terminal
   * VS Code
 
-##Authors
+## Authors...
   Mark Powalisz
 
 ![alt text](bamazon_pass.gif "Passing GIF")
