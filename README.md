@@ -8,7 +8,6 @@ Week 6 Assignment: Bamazon
 ## Getting Started
   * Clone the repository.
   * Run 'npm install' in command line to install dependencies
-  * Run command 'node app.js' to play Star Wars Trivia
 
 ## Technology used
   * Node.js
