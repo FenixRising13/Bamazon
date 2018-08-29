@@ -1,16 +1,17 @@
-import 'console.table'
-import { prompt } from 'inquirer'
-import { createConnection } from 'mysql'
-import { red, green } from 'chalk'
+require('console.table')
+var inquirer = require('inquirer')
+var mysql = require('mysql')
+var Chalk = require('chalk')
 
-const connection = createConnection({
+var connection = mysql.createConnection({
   host: 'localhost',
+  port: 8889,
   user: 'root',
   password: 'root',
   database: 'Bamazon'
 })
 
-connection.connect((err) => {
+connection.connect(function (err) {
   if (err) {
     console.error('error connecting: ' + err.stack)
     return
@@ -20,16 +21,16 @@ connection.connect((err) => {
   ReadData()
 })
 
-const ReadData = () => {
-  connection.query('SELECT id, item_id, price, stock_quantity, platform FROM products', (err2, res) => {
-    if (err2) throw err2
+var ReadData = function () {
+  connection.query('SELECT id, item_id, price, stock_quantity, platform FROM products', function (err, res) {
+    if (err) throw err
     console.table(res)
     ask()
   })
 }
 // Inquirer function
-const ask = () => {
-  prompt([{
+var ask = function () {
+  inquirer.prompt([{
     name: 'choose',
     message: 'What is the ID of the product you would like to buy?'
   },
@@ -38,39 +39,39 @@ const ask = () => {
     message: 'How many would you like?'
   }
   ])
-    .then((answer) => {
-      connection.query('SELECT * FROM products WHERE id = ?', [answer.choose], (err3, results) => {
-        if (err3) throw err3
+    .then(function (answer) {
+      connection.query('SELECT * FROM products WHERE id = ?', [answer.choose], function (err, results) {
+        if (err) throw err
         // console.log(results);
-        const qty = parseInt(answer.qty)
-        let stock
-        let price
-        // console.log(qty)
+        var qty = parseInt(answer.qty)
+        var stock
+        var price
+        // console.log(qty);
 
-        for (let i = 0; i < results.length; i++) {
+        for (var i = 0; i < results.length; i++) {
           stock = results[i].stock_quantity
           price = results[i].price
         }
         console.log(stock)
         // If qty is more than stock
         if (answer.choose === '') {
-          console.log(red('Item Does Not Exist'))
+          console.log(Chalk.red('Item Does Not Exist'))
           ask()
         } else if (qty > stock) {
-          console.log(red('Insufficient Qty'))
+          console.log(Chalk.red('Insufficient Qty'))
           ask()
           // if quantity is <= stock
         } else {
-          console.log(green('Your total purchase is $' + (price * qty) + ' + tax'))
+          console.log(Chalk.green('Your total purchase is $' + (price * qty) + ' + tax'))
           update(qty, answer.choose)
         }
       })
     })
 }
 
-const update = (qty, id) => {
-  connection.query('UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?', [qty, id], function (err4, res) {
-    if (err4) throw err4
+var update = function (qty, id) {
+  connection.query('UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?', [qty, id], function (err, res) {
+    if (err) throw err
   })
   connection.end()
 }
