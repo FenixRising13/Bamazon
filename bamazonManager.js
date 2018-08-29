@@ -67,11 +67,12 @@ function lowInv(results) {
 
     connection.query('SELECT id, item_id, price, stock_quantity FROM products', function (err, results) {
         if (err) throw err;
-
+        console.log("This is the result of the lowInv function: " + results);
         for (i = 0; i < results.length; i++) {
             stock = results[i].stock_quantity;
         }
-        console.table(stock);
+        console.table(results);
+        // console.table(stock);
 
     })
     ask();
