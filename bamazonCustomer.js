@@ -1,4 +1,4 @@
-require('console.table')
+// require('console.table')
 var inquirer = require('inquirer')
 var mysql = require('mysql')
 var Chalk = require('chalk')
@@ -22,7 +22,7 @@ connection.connect(function (err) {
 })
 
 var ReadData = function () {
-  connection.query('SELECT id, item_id, price, stock_quantity, platform FROM products', function (err, res) {
+  connection.query('SELECT id, item, price, stock, platform FROM products', function (err, res) {
     if (err) throw err
     console.table(res)
     ask()
@@ -43,19 +43,21 @@ var ask = function () {
       connection.query('SELECT * FROM products WHERE id = ?', [answer.choose], function (err, results) {
         if (err) throw err
         // console.log(results);
-        var qty = parseInt(answer.qty)
+        var qty = answer.qty
+        // console.log('qty: ' + qty)
         var stock
         var price
-        // console.log(qty);
-
         for (var i = 0; i < results.length; i++) {
-          stock = results[i].stock_quantity
+          stock = results[i].stock
           price = results[i].price
         }
-        console.log(stock)
+        // console.log('stock' + stock)
         // If qty is more than stock
         if (answer.choose === '') {
           console.log(Chalk.red('Item Does Not Exist'))
+          ask()
+        } else if (qty === '') {
+          console.log(Chalk.yellow('No quantity entered'))
           ask()
         } else if (qty > stock) {
           console.log(Chalk.red('Insufficient Qty'))
@@ -70,7 +72,7 @@ var ask = function () {
 }
 
 var update = function (qty, id) {
-  connection.query('UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?', [qty, id], function (err, res) {
+  connection.query('UPDATE products SET stock = stock - ? WHERE id = ?', [qty, id], function (err, res) {
     if (err) throw err
   })
   connection.end()

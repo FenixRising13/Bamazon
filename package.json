@@ -9,11 +9,10 @@
   "author": "Mark Powalisz",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^2.3.0",
-    "colors": "^1.1.2",
+    "chalk": "^2.4.1",
     "console.table": "^0.10.0",
-    "inquirer": "^5.0.0",
-    "mysql": "^2.15.0"
+    "inquirer": "^5.2.0",
+    "mysql": "^2.16.0"
   },
   "devDependencies": {
     "eslint": "^5.4.0",
